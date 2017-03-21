@@ -1,0 +1,27 @@
+<h1>Show Article</h1>
+Escrito por: <%= @article.user.email %>
+Visitas: <%= @article.visits_count %>
+
+<div class="field">
+	<% @article.categories.each do |category| %>
+		<%= link_to category.name, category, style: "color: #{category.color}" %>
+	<% end %>
+</div>
+<div class="field">
+	<%= image_tag @article.cover.url() %> <!-- se puede poner dentro del () mediom, thums, etc..segun lo tengamos configurado -->
+</div>
+<h2><%= @article.title %></h2>
+<p><%= @article.body %></p>
+
+<%= link_to "Editar", edit_article_path(@article) %>
+
+<div class="field">
+	<h3>Comentarios</h3>
+	<ul id="comments-box">
+	<% @article.comments.each do |comment| %>
+		<li><%= comment.body %> - <%= current_user.email %></li>
+	<% end %>
+	</ul>
+	<%= render "comments/form" %>
+
+</div>
