@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
 	#before_action :set_article, except: [:index, :new, :create]
 	#before_action :authenticate_editor!, only: [:new, :create, :update]
 	before_action :authenticate_admin!, only: [:destroy, :publish]
+	before_action :set_article, only: [:show, :destroy, :update]
 	#GET /articles
 	def index
 		@articles = Article.publicados.ultimos
